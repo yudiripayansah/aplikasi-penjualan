@@ -20,5 +20,18 @@ class menuTableSeeder extends Seeder
             'link'=>'contoh.com',
             'image'=>'contoh.png',
         ]);
+        DB::table('menu')->insert([
+            'id_parent'=>'2',
+            'label'=>'contoh2',
+            'link'=>'contoh2.com',
+            'image'=>'contoh2.png',
+        ]);
+        DB::table('menu')->insert([
+            'id_parent'=>'3',
+            'label'=>'contoh3',
+            'link'=>'contoh3.com',
+            'image'=>'contoh3.png',
+        ]);
+
     }
 }
