@@ -14,10 +14,10 @@ class PurchaseItemSeeder extends Seeder
     public function run()
     {
         DB::table('purchase_items')->insert([
-            'id_purchase' => 2,
-            'id_product' => 2,
-            'price' => 175000,
-            'description' => 'laptop'
+            'id_purchase' => 3,
+            'id_product' => 3,
+            'price' => 250000,
+            'description' => 'buku'
         ]);
     }
 }
