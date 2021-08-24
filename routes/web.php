@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ use App\Http\Controllers\OrdersController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/orders', [OrdersController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/form/{mode}', [UserController::class, 'form']);
