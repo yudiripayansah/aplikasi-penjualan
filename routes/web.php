@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PurchaseItemsController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,5 @@ use App\Http\Controllers\PurchaseItemsController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/purchaseitems', [PurchaseItemsController::class, 'index']);
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/form/{mode}', [UserController::class, 'form']);
