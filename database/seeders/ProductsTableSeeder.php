@@ -15,13 +15,13 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         DB::table('products')->insert([
-            'name'=>'pensil',
-            'description'=>'pensil faber-castell',
-            'image'=>'faber-castell',
-            'price'=>'4000',
-            'stock'=>'20',
-            'id_category'=>'012',
-            'id_group'=>'096',
+            'name'=>'flashdisk',
+            'description'=>'flashdisk sandisk',
+            'image'=>'sandisk',
+            'price'=>'95000',
+            'stock'=>'50',
+            'id_category'=>'172',
+            'id_group'=>'453',
         ]);
     }
 }
