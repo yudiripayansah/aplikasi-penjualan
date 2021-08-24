@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class suppliersTableSeeder extends Seeder
+class SupplierSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,6 +20,6 @@ class suppliersTableSeeder extends Seeder
             'address'=>'perum delivina',
             'phone'=>'082299004628',
             'image'=>'adidas samba',
-        ]); 
+        ]);
     }
 }

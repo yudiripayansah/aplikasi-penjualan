@@ -9,6 +9,8 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        return view('layout.index');
+        $data['activePage'] = 'dashboard';
+        $data['title'] = 'Dashboard';
+        return view('pages.dashboard', $data);
     }
 }
