@@ -2,42 +2,51 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Validator;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    use HasFactory;
+    protected $table = 'users';
     protected $fillable = [
         'name',
+        'username',
         'email',
+        'phone',
+        'role',
         'password',
+        'image',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    
+    public static function validate($validate)
+    {
+        $rule = [
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'role' => 'required',
+            'password' => 'required',
+        ];
+        if ($validate['id']) {
+            $rule['username'] = 'required|unique:App\Models\User,username,'.$validate['id'];
+        }
+        $validator = Validator::make($validate, $rule);
+        if ($validator->fails()) {
+            $errors =  $validator->errors()->all();
+            $res = array(
+                'status' => false,
+                'error' => $errors,
+                'msg' => 'Error on Validation'
+            );
+        } else {
+            $res = array(
+                'status' => true,
+                'msg' => 'Validation Ok'
+            );
+        }
+        return $res;
+    }
 }
