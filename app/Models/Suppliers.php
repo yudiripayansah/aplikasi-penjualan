@@ -10,12 +10,6 @@ class suppliers extends model
 {
     use HasFactory;
     protected $table = 'suppliers'; 
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',

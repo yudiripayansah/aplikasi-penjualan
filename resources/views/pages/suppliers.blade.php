@@ -73,7 +73,7 @@
 @section('script')
 <script>
   $(document).ready(()=>{
-    $('#table-user').DataTable()
+    $('#table-suppliers').DataTable()
   })
 </script>
 @endsection

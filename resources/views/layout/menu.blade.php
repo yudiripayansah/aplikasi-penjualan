@@ -12,6 +12,12 @@
       'label'=> 'User',
       'key'=> 'user',
     ],
+    [
+      'icon'=> 'fas fa-suppliers',
+      'target'=> '/suppliers',
+      'label'=> 'suppliers',
+      'key'=> 'suppliers',
+    ],
   ];
 @endphp
 <!--begin::Aside Menu-->
