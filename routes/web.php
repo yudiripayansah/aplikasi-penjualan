@@ -19,4 +19,5 @@ use App\Http\Controllers\UserController;
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/menu', [MenuController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
+Route::get('/menu/form/{mode}', [MenuController::class, 'form']);
 Route::get('/user/form/{mode}', [UserController::class, 'form']);
