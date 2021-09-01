@@ -49,4 +49,15 @@ class UserController extends Controller
             return redirect('/user')->with('error', 'Data Gagal Disimpan');
         }
     }
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+        if ($id) {
+            $dataDelete = User::find($id);
+            $dataDelete->delete();
+            return redirect('/user')->with('success', 'Data Telah Dihapus');
+        } else {
+            return redirect('/user')->with('error', 'Tidak ada data yang dihapus, data tidak ditemukan');
+        }
+    }
 }
