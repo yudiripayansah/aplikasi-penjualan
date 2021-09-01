@@ -20,3 +20,4 @@ Route::get('/', [DashboardController::class, 'index']);
 Route::get('/purchases', [purchasesController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/form/{mode}', [UserController::class, 'form']);
+Route::get('/Purchases/form/{mode}', [PurchasesController::class, 'form']);

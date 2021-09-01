@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchases;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class PurchasesController extends Controller
 {
     public function index(Request $request)
     {
-        return "Ini Halaman Menu"
+        $listData = Purchases::all();
+        $data['activePage'] = 'Purchases';
+        $data['title'] = 'Purchases';
+        $data['listData'] = $listData;
+        return view('pages.Purchases', $data);
+    }
+    public function form($mode, Request $request)
+    {
+        $data['activePage'] = 'Purchases';
+        $data['title'] = 'Purchases';
+        return view('form.Purchases', $data);
     }
 }
