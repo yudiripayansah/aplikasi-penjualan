@@ -31,6 +31,17 @@
             </div>
           </div>
           <div class="card-body">
+            @if (\Session::has('success') || \Session::has('error'))
+                <div class="alert {{(\Session::has('success')) ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show">
+                    @php
+                        $msg = (\Session::get('success')) ? \Session::get('success') : \Session::get('error');
+                    @endphp
+                    {{$msg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="table-responsive">
               <!--begin: Datatable-->
               <table id="table-user" class="table table-bordered table-striped table-hover">
