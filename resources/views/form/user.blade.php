@@ -26,7 +26,64 @@
             </div>
           </div>
           <div class="card-body">
-
+            <form action="/user/save" method="post">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+              @if ($formData)
+                <input type="hidden" name="id" value="{{$formData['id']}}">
+              @endif
+              <div class="row">
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{($formData) ? $formData['name'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" value="{{($formData) ? $formData['username'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" value="{{($formData) ? $formData['email'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" value="{{($formData) ? $formData['password'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{($formData) ? $formData['phone'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-control">
+                      <option value="ADMIN" {{($formData && $formData['role'] == 'ADMIN') ? 'selected' : null}}>ADMIN</option>
+                      <option value="MANAGER" {{($formData && $formData['role'] == 'MANAGER') ? 'selected' : null}}>MANAGER</option>
+                      <option value="USER" {{($formData && $formData['role'] == 'USER') ? 'selected' : null}}>USER</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="text" name="image" id="image" class="form-control" value="{{($formData) ? $formData['image'] : null}}">
+                  </div>
+                </div>
+                <div class="col-12 text-right">
+                  <a href="/user" class="btn btn-secondary">Cancel</a>
+                  <button class="btn btn-primary ml-3" type="submit">Save</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
         <!--end::Card-->
