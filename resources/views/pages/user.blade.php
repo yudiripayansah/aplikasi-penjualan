@@ -31,6 +31,17 @@
             </div>
           </div>
           <div class="card-body">
+            @if (\Session::has('success') || \Session::has('error'))
+                <div class="alert {{(\Session::has('success')) ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show">
+                    @php
+                        $msg = (\Session::get('success')) ? \Session::get('success') : \Session::get('error');
+                    @endphp
+                    {{$msg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="table-responsive">
               <!--begin: Datatable-->
               <table id="table-user" class="table table-bordered table-striped table-hover">
@@ -56,7 +67,7 @@
                     <td class="text-center">{{$ld->role}}</td>
                     <td class="text-center">
                       <a href="/user/form/update/{{$ld->id}}" class="btn btn-info btn-sm mx-1">Update</a>
-                      <button class="btn btn-danger btn-sm mx-1">delete</button>
+                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id={{$ld->id}}>delete</button>
                     </td>  
                   </tr>
                   @endforeach
@@ -71,11 +82,39 @@
       <!--end::Container-->
     </div>
     <!--end::Entry-->
+    <div class="modal" tabindex="-1" role="dialog" id="modal-hapus">
+      <div class="modal-dialog" role="document">
+        <form action="/user/delete" method="post">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+          <input type="hidden" name="id" id="delete-id"/>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Hapus Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger">Hapus</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 @endsection
 @section('script')
 <script>
   $(document).ready(()=>{
     $('#table-user').DataTable()
+    $('#btn-delete').click(function(){
+      let deleteId = $(this).attr('data-id')
+      $('#modal-hapus').modal('show')
+      $('#delete-id').val(deleteId)
+    })
   })
 </script>
 @endsection
