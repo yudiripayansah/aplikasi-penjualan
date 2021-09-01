@@ -18,5 +18,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/purchaseitems', [PurchaseItemsController::class, 'index']);
+Route::get('/purchaseitems/form/{mode}/{id_purchase?}', [PurchaseItemsController::class, 'form']);
+Route::post('/purchaseitems/store', [PurchaseItemsController::class, 'store']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/form/{mode}', [UserController::class, 'form']);
