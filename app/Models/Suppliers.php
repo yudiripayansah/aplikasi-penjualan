@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\model;
+use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 
-class suppliers extends model
+class Suppliers extends Model
 {
     use HasFactory;
     protected $table = 'suppliers'; 
+
     protected $fillable = [
         'name',
         'email',
@@ -26,10 +28,9 @@ class suppliers extends model
             'address' => 'required',
             'phone' => 'required',
             'image' => 'required',
-           
         ];
         if ($validate['id']) {
-            $rule['suppliers'] = 'required|unique:App\Models\suppliers,suppliers,'.$validate['id'];
+            $rule['username'] = 'required|unique:App\Models\Suppliers,username,'.$validate['id'];
         }
         $validator = Validator::make($validate, $rule);
         if ($validator->fails()) {
@@ -49,3 +50,5 @@ class suppliers extends model
     }
 }
 
+
+   
