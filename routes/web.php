@@ -1,9 +1,9 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuppliersController;
-
 
 
 /*
@@ -19,6 +19,7 @@ use App\Http\Controllers\SuppliersController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/suppliers', [SuppliersController::class, 'index']);
-
-
-
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/form/{mode}/{id?}', [UserController::class, 'form']);
+Route::post('/user/save', [UserController::class, 'save']);
+Route::post('/user/delete', [UserController::class, 'delete']);
