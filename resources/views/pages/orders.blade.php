@@ -26,26 +26,38 @@
             </div>
             <div class="card-toolbar">
               <!--begin::Button-->
-              <a href="/user/form/add" class="btn btn-primary font-weight-bolder">Add New</a>
+              <a href="/orders/form/add" class="btn btn-primary font-weight-bolder">Add New</a>
               <!--end::Button-->
             </div>
           </div>
           <div class="card-body">
+            @if (\Session::has('success') || \Session::has('error'))
+                <div class="alert {{(\Session::has('success')) ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show">
+                    @php
+                        $msg = (\Session::get('success')) ? \Session::get('success') : \Session::get('error');
+                    @endphp
+                    {{$msg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="table-responsive">
               <!--begin: Datatable-->
-              <table id="table-user" class="table table-bordered table-striped table-hover">
+              <table id="table-orders" class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" title="No" width="5%">No</th>
-                    <th class="text-center" title="ID_Customer">ID_Customer</th>
+                    <th class="text-center" title="ID">ID</th>
+                    <th class="text-center" title="ID">ID_Customer</th>
                     <th class="text-center" title="Type">Type</th>
                     <th class="text-center" title="Nama">Nama</th>
                     <th class="text-center" title="Address">Address</th>
                     <th class="text-center" title="Email">Email</th>
                     <th class="text-center" title="Phone">Phone</th>
-                     <th class="text-center" title="Total_Item">Total_Item</th>
-                     <th class="text-center" title="Total_Price">Total_Price</th>
-                     <th class="text-center" title="Descreption">Descreption</th>
+                    <th class="text-center" title="Total_Item">Total_Item</th>
+                    <th class="text-center" title="Total_Price">Total_Price</th>
+                    <th class="text-center" title="Descreption">Descreption</th>
+                    <th class="text-center" title="Status">Status</th>
                     <th class="text-center" title="Action" width="15%">Action</th>
                   </tr>
                 </thead>
@@ -61,10 +73,11 @@
                     <td class="text-center">{{$ld->phone}}</td>
                     <td class="text-center">{{$ld->total_item}}</td>
                     <td class="text-center">{{$ld->total_price}}</td>
-                    <td class="text-center">{{$ld->descreption}}</td>
+                    <td class="text-center">{{$ld->descreption}}</td> 
+                    <td class="text-center">{{$ld->status}}</td>  
                     <td class="text-center">
-                      <a href="/user/form/update/{{$ld->id}}" class="btn btn-info btn-sm mx-1">Update</a>
-                      <button class="btn btn-danger btn-sm mx-1">delete</button>
+                      <a href="/orders/form/update/{{$ld->id}}" class="btn btn-info btn-sm mx-1">Update</a>
+                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id={{$ld->id}}>delete</button>
                     </td>  
                   </tr>
                   @endforeach
@@ -79,11 +92,39 @@
       <!--end::Container-->
     </div>
     <!--end::Entry-->
+    <div class="modal" tabindex="-1" role="dialog" id="modal-hapus">
+      <div class="modal-dialog" role="document">
+        <form action="/orders/delete" method="post">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+          <input type="hidden" name="id" id="delete-id"/>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Hapus Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger">Hapus</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 @endsection
 @section('script')
 <script>
   $(document).ready(()=>{
     $('#table-orders').DataTable()
+    $('#btn-delete').click(function(){
+      let deleteId = $(this).attr('data-id')
+      $('#modal-hapus').modal('show')
+      $('#delete-id').val(deleteId)
+    })
   })
 </script>
 @endsection

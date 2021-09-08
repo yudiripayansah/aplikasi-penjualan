@@ -26,7 +26,78 @@
             </div>
           </div>
           <div class="card-body">
-
+            <form action="/orders/save" method="post">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+              @if ($formData)
+                <input type="hidden" name="id" value="{{$formData['id']}}">
+              @endif
+              <div class="row">
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="id_customer">ID_Customer</label>
+                    <input type="text" name="id_customer" id="id_customer" class="form-control" value="{{($formData) ? $formData['name'] : null}}">
+                    </div>
+                  </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" name="type" id="type" class="form-control" value="{{($formData) ? $formData['username'] : null}}">
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input type="text" name="nama" id="nama" class="form-control" value="{{($formData) ? $formData['username'] : null}}">
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" value="{{($formData) ? $formData['username'] : null}}">
+                  </div>  
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" value="{{($formData) ? $formData['email'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{($formData) ? $formData['phone'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="total_item">Total_Item</label>
+                    <input type="text" name="total_item" id="total_item" class="form-control" value="{{($formData) ? $formData['password'] : null}}">
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="total_price">Total_Price</label>
+                    <input type="text" name="total_price" id="total_price" class="form-control" value="{{($formData) ? $formData['password'] : null}}">
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="descreption">Descreption</label>
+                    <input type="text" name="descreption" id="descreption" class="form-control" value="{{($formData) ? $formData['password'] : null}}">
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-4">
+                  <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" name="status" id="status" class="form-control" value="{{($formData) ? $formData['password'] : null}}">
+                    </div>
+                  </div>
+                <div class="col-12 text-right">
+                  <a href="/orders" class="btn btn-secondary">Cancel</a>
+                  <button class="btn btn-primary ml-3" type="submit">Save</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
         <!--end::Card-->
