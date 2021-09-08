@@ -27,13 +27,16 @@
           </div>
           <div class="card-body">
 
-          <form method="post" action="/products/store">
- 
- {{ csrf_field() }}
+          <form method="post" action="/products/save">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+          @if ($formData)
+                <input type="hidden" name="id" value="{{$formData['id']}}">
+          @endif
 
  <div class="form-group">
      <label>Name</label>
-     <input type="text" name="name" class="form-control" placeholder="masukkan nama produk">
+     <input type="text" name="name" id="name" class="form-control" placeholder="masukkan nama produk" value="{{($formData) ? $formData['name'] : null}}">
 
      @if($errors->has('name'))
          <div class="text-danger">
@@ -45,7 +48,7 @@
 
  <div class="form-group">
      <label>Description</label>
-     <input type="text" name="description" class="form-control" placeholder="masukkan deskripsi produk">
+     <input type="text" name="description" id="description" class="form-control" placeholder="masukkan deskripsi produk" value="{{($formData) ? $formData['description'] : null}}">
 
       @if($errors->has('description'))
          <div class="text-danger">
@@ -57,7 +60,7 @@
 
  <div class="form-group">
      <label>Image</label>
-     <input type="text" name="image" class="form-control" placeholder="masukkan gambar produk">
+     <input type="text" name="image" id="image" class="form-control" placeholder="masukkan gambar produk" value="{{($formData) ? $formData['image'] : null}}">
 
       @if($errors->has('image'))
          <div class="text-danger">
@@ -69,7 +72,7 @@
 
  <div class="form-group">
      <label>Price</label>
-     <input type="text" name="price" class="form-control" placeholder="masukkan harga produk">
+     <input type="text" name="price" id="price" class="form-control" placeholder="masukkan harga produk" value="{{($formData) ? $formData['price'] : null}}">
 
       @if($errors->has('price'))
          <div class="text-danger">
@@ -81,7 +84,7 @@
 
  <div class="form-group">
      <label>Stock</label>
-     <input type="text" name="stock" class="form-control" placeholder="masukkan stok produk">
+     <input type="text" name="stock" id="stock" class="form-control" placeholder="masukkan stok produk" value="{{($formData) ? $formData['stock'] : null}}">
 
       @if($errors->has('stock'))
          <div class="text-danger">
@@ -93,7 +96,7 @@
 
  <div class="form-group">
      <label>ID Category</label>
-     <input type="text" name="id_category" class="form-control" placeholder="masukkan id category">
+     <input type="text" name="id_category" id="id_category" class="form-control" placeholder="masukkan id category" value="{{($formData) ? $formData['id_category'] : null}}">
 
       @if($errors->has('id_category'))
          <div class="text-danger">
@@ -104,7 +107,7 @@
  </div>
  <div class="form-group">
      <label>ID Group</label>
-     <input type="text" name="id_group" class="form-control" placeholder="masukkan id group">
+     <input type="text" name="id_group" id="id_group" class="form-control" placeholder="masukkan id group" value="{{($formData) ? $formData['id_group'] : null}}">
 
       @if($errors->has('id_group'))
          <div class="text-danger">
@@ -115,9 +118,13 @@
  </div>
 
  <div class="form-group">
-     <input type="submit" class="btn btn-success" value="Simpan">
-     <input type="reset" class="btn btn-danger" value="Reset" >
+    <input type="submit" class="btn btn-success" value="Simpan">
  </div>
+
+ <div class="col-12 text-right">
+    <a href="/products" class="btn btn-secondary">Back</a>
+  </div>
+ 
 
 </form>
           

@@ -49,6 +49,7 @@ class UserController extends Controller
             return redirect('/user')->with('error', 'Data Gagal Disimpan');
         }
     }
+    
     public function delete(Request $request)
     {
         $id = $request->id;

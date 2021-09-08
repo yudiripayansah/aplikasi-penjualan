@@ -23,6 +23,9 @@ class CreateProductsTable extends Migration
             $table->integer('id_category');
             $table->integer('id_group');
             $table->softDeletes('deleted_at');
+            $table->timestamps('updated_at');
+            $table->timestamps('created_at');
+            $table->timestamps();
         });
     }
 

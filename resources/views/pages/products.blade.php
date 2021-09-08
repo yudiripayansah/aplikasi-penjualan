@@ -30,7 +30,22 @@
               <!--end::Button-->
             </div>
           </div>
+
           <div class="card-body">
+
+          @if (\Session::has('success') || \Session::has('error'))
+                <div class="alert {{(\Session::has('success')) ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show">
+                    @php
+                        $msg = (\Session::get('success')) ? \Session::get('success') : \Session::get('error');
+                    @endphp
+                    {{$msg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+
             <div class="table-responsive">
               <!--begin: Datatable-->
               <table id="table-products" class="table table-bordered table-striped table-hover">
@@ -44,10 +59,11 @@
                     <th class="text-center" title="Stock">Stock</th>
                     <th class="text-center" title="Id_Category">ID Category</th>
                     <th class="text-center" title="Id_Group">ID Group</th>
+                    <th class="text-center" title="Action" >Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($listData as $key=>$ld)
+                @foreach ($listData as $key=>$ld)
                   <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$ld->name}}</td>
@@ -58,8 +74,8 @@
                     <td class="text-center">{{$ld->id_category}}</td>
                     <td class="text-center">{{$ld->id_group}}</td>
                     <td class="text-center">
-                      <a href="/products/form/edit" class="btn btn-info btn-sm mx-1">Update</a>
-                      <button class="btn btn-danger btn-sm mx-1">delete</button>
+                      <a href="/products/form/update/{{$ld->id}}" class="btn btn-info btn-sm mx-1">Update</a>
+                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id={{$ld->id}}>Delete</button>
                     </td>  
                   </tr>
                   @endforeach
@@ -74,11 +90,43 @@
       <!--end::Container-->
     </div>
     <!--end::Entry-->
+
+
+    <div class="modal" tabindex="-1" role="dialog" id="modal-hapus">
+      <div class="modal-dialog" role="document">
+        <form action="/products/delete" method="post">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+          <input type="hidden" name="id" id="delete-id"/>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Hapus Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger">Hapus</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
 @endsection
 @section('script')
 <script>
-  $(document).ready(()=>{
+ $(document).ready(()=>{
     $('#table-products').DataTable()
+    $('#btn-delete').click(function(){
+      let deleteId = $(this).attr('data-id')
+      $('#modal-hapus').modal('show')
+      $('#delete-id').val(deleteId)
+    })
   })
 </script>
 @endsection

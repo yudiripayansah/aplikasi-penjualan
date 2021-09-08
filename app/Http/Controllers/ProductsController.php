@@ -8,57 +8,29 @@ use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
-   
     public function index(Request $request)
     {
-        $listData = Products::all();
+        $listData = Products::orderBy('id', 'desc')->get();
         $data['activePage'] = 'products';
         $data['title'] = 'Products';
         $data['listData'] = $listData;
         return view('pages.products', $data);
     }
 
-    public function form($mode, Request $request)
+    public function form($mode,  $id=0, Request $request)
     {
         $data['activePage'] = 'products';
         $data['title'] = 'Products';
+        $data['formData'] = false;
+        if ($id) {
+            $data['formData'] = Products::find($id);
+        }
         return view('form.products', $data);
     }
 
-    public function store(Request $request)
+    public function save(Request $request)
     {
         $this->validate($request,[
-    		'name' => 'required',
-    		'description' => 'required',
-            'image' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'id_category' => 'required',
-            'id_group' => 'required',
-    	]);
-
-        DB::table('products')->insert([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $request->image,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'id_category' => $request->id_category,
-            'id_group' => $request->id_group,
-        ]);
-        return redirect('/products/');
-    }
-    
-    public function edit($id)
-    {
-        $products = Products::find($id);
-        return view('form.edit', $data);
-    }
-
-    public function update($id, Request $request)
-    {
-
-    $this->validate($request,[
 	        'name' => 'required',
     		'description' => 'required',
             'image' => 'required',
@@ -66,18 +38,42 @@ class ProductsController extends Controller
             'stock' => 'required',
             'id_category' => 'required',
             'id_group' => 'required',
-    ]);
+        ]);
 
-        $products = Products::find($id);
-        $products->name = $request->name;
-        $products->description = $request->description;
-        $products->image = $request->image;
-        $products->price = $request->price;
-        $products->stock = $request->stock;
-        $products->id_category = $request->id_category;
-        $products->id_group = $request->id_group;
-        $products->save();
-        return redirect('/products');
+        $dataForm = $request->all();
+        if (isset($dataForm['id'])) {
+            $dataUpdate = Products::find($dataForm['id']);
+            $dataUpdate->name = $dataForm['name'];
+            $dataUpdate->description = $dataForm['description'];
+            $dataUpdate->image = $dataForm['image'];
+            $dataUpdate->price = $dataForm['price'];
+            $dataUpdate->stock = $dataForm['stock'];
+            $dataUpdate->id_category = $dataForm['id_category'];
+            $dataUpdate->id_group = $dataForm['id_group'];
+            $dataUpdate->save();
+            $doSave = true;
+        } else {
+            $doSave = Products::create($dataForm);
         }
+        if ($doSave) {
+            return redirect('/products')->with('success', 'Data Telah Disimpan');
+        } else {
+            return redirect('/products')->with('error', 'Data Gagal Disimpan');
+        }
+    }
 
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+        if ($id) {
+            $dataDelete = Products::find($id);
+            $dataDelete->delete();
+            return redirect('/products')->with('success', 'Data Telah Dihapus');
+        } else {
+            return redirect('/products')->with('error', 'Tidak ada data yang dihapus, data tidak ditemukan');
+        }
+    }
 }
+   
+    
+    

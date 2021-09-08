@@ -31,6 +31,8 @@
             </div>
           </div>
           <div class="card-body">
+
+
             @if (\Session::has('success') || \Session::has('error'))
                 <div class="alert {{(\Session::has('success')) ? 'alert-success' : 'alert-danger'}} alert-dismissible fade show">
                     @php
@@ -42,6 +44,8 @@
                     </button>
                 </div>
             @endif
+
+
             <div class="table-responsive">
               <!--begin: Datatable-->
               <table id="table-user" class="table table-bordered table-striped table-hover">
@@ -82,6 +86,8 @@
       <!--end::Container-->
     </div>
     <!--end::Entry-->
+
+
     <div class="modal" tabindex="-1" role="dialog" id="modal-hapus">
       <div class="modal-dialog" role="document">
         <form action="/user/delete" method="post">
@@ -105,6 +111,8 @@
         </form>
       </div>
     </div>
+
+    
 @endsection
 @section('script')
 <script>

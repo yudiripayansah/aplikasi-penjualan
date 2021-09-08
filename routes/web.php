@@ -14,8 +14,6 @@ Route::post('/user/save', [UserController::class, 'save']);
 Route::post('/user/delete', [UserController::class, 'delete']);
 
 Route::get('/products', [ProductsController::class, 'index']);
-Route::get('/products/form/{mode}', [ProductsController::class, 'form']);
-
-Route::post('/products/store', [ProductsController::class, 'store']);
-Route::get('/products/edit/{id}', [ProductsController::class, 'edit']);
-Route::put('/products/update/{id}', [ProductsController::class, 'update']);
+Route::get('/products/form/{mode}/{id?}', [ProductsController::class, 'form']);
+Route::post('/products/save', [ProductsController::class, 'save']);
+Route::post('/products/delete', [ProductsController::class, 'delete']);
