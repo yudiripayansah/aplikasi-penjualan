@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\controllers\purchasesController;
+use App\Http\controllers\PurchasesController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [DashboardController::class, 'index']);
-Route::get('/purchases', [purchasesController::class, 'index']);
+Route::get('/Purchases', [PurchasesController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/form/{mode}', [UserController::class, 'form']);
 Route::get('/Purchases/form/{mode}', [PurchasesController::class, 'form']);

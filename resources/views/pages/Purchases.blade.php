@@ -75,7 +75,7 @@
 @section('script')
 <script>
   $(document).ready(()=>{
-    $('#table-user').DataTable()
+    $('#table-Purchases').DataTable()
   })
 </script>
 @endsection
