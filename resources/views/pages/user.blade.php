@@ -67,7 +67,7 @@
                     <td class="text-center">{{$ld->role}}</td>
                     <td class="text-center">
                       <a href="/user/form/update/{{$ld->id}}" class="btn btn-info btn-sm mx-1">Update</a>
-                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id={{$ld->id}}>delete</button>
+                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id="{{$ld->id}}">delete</button>
                     </td>  
                   </tr>
                   @endforeach

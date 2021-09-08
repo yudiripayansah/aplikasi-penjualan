@@ -18,6 +18,12 @@
       'label'=> 'PurchaseItem',
       'key'=> 'purchaseitems',
     ],
+    [
+      'icon'=> 'fas fa-users',
+      'target'=> '/pos',
+      'label'=> 'Pos',
+      'key'=> 'pos',
+    ],
   ];
 @endphp
 <!--begin::Aside Menu-->

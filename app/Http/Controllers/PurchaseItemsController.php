@@ -16,21 +16,22 @@ class PurchaseItemsController extends Controller
         $data['listData'] = $listData;
         return view('pages.purchaseitem', $data);
     }
-    public function form($mode, Request $request)
+    public function form($mode, $id = 0, Request $request)
     {
         $data['activePage'] = 'purchaseitem';
         $data['title'] = 'PurchaseItem';
-        // $data['formData'] = null;
-        // if($id_purchase){
-        //     $data['formData'] = PurchaseItem::find($id_purchase);
-        // }
+        $data['formData'] = false;
+        if ($id) {
+            $data['formData'] = PurchaseItem::find($id);
+        }
         return view('form.purchaseitem', $data);
     }
     
     public function store(Request $request){
         $dataForm = $request->all();
-        if(isset($dataForm['id_purchase'])){
-            $dataUpdate = PurchaseItem::find($dataForm['id_purchase']);
+        if(isset($dataForm['id'])){
+            $dataUpdate = PurchaseItem::find($dataForm['id']);
+            $dataUpdate->id_purchase = $dataForm['id_purchase'];
             $dataUpdate->id_product = $dataForm['id_product'];
             $dataUpdate->price = $dataForm['price'];
             $dataUpdate->description = $dataForm['description'];
@@ -40,9 +41,20 @@ class PurchaseItemsController extends Controller
             $doSave = PurchaseItem::create($dataForm);
         }
         if($doSave){
-            return redirect('/purchaseitem')->with('success', 'Data telah disimpan');
+            return redirect('/purchaseitems')->with('success', 'Data telah disimpan');
         }else{
-            return redirect('/purchaseitem')->with('error', 'Data gagal disimpan');
+            return redirect('/purchaseitems')->with('error', 'Data gagal disimpan');
+        }
+    }
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+        if ($id) {
+            $dataDelete = PurchaseItem::find($id);
+            $dataDelete->delete();
+            return redirect('/purchaseitems')->with('success', 'Data Telah Dihapus');
+        } else {
+            return redirect('/purchaseitems')->with('error', 'Tidak ada data yang dihapus, data tidak ditemukan');
         }
     }
 }

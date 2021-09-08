@@ -29,20 +29,23 @@
             <form action="/purchaseitems/store" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                 <div class="form-group">
-                  <label for="id_purchase">ID Purchase</label>
-                  <input type="text" class="form-control" name="id_purchase">
+                @if ($formData)
+                <input type="hidden" name="id" value="{{$formData['id']}}">
+                @endif
+                <label for="id_purchase">ID Purchase</label> 
+                <input type="text" name="id_purchase" class="form-control" value="{{($formData) ? $formData['id_purchase'] : null}}">
                 </div>
                 <div class="form-group">
                   <label for="id_product">ID Product</label>
-                  <input type="text" class="form-control" name="id_product">
+                  <input type="text" class="form-control" name="id_product" value="{{($formData) ? $formData['id_product'] : null}}">
                 </div>
                 <div class="form-group">
                   <label for="price">Price</label>
-                  <input type="text" class="form-control" name="price">
+                  <input type="text" class="form-control" name="price" value="{{($formData) ? $formData['price'] : null}}">
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <input type="text" class="form-control" name="description">
+                  <input type="text" class="form-control" name="description" value="{{($formData) ? $formData['description'] : null}}">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
