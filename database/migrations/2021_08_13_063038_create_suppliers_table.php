@@ -18,8 +18,8 @@ class CreateSuppliersTable extends Migration
             $table->text('name');
             $table->text('email');
             $table->text('address');
-            $table->text('phone');
-            $table->text('image');
+            $table->text('phone')->nullable($value = true);
+            $table->text('image')->nullable($value = true);
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });
