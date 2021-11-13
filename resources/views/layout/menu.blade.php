@@ -7,10 +7,46 @@
       'key'=> 'dashboard',
     ],
     [
+      'icon'=> 'fas fa-bars',
+      'target'=> '/menu',
+      'label'=> 'Menu',
+      'key'=> 'menu',
+    ],
+    [
       'icon'=> 'fas fa-users',
       'target'=> '/user',
       'label'=> 'User',
       'key'=> 'user',
+    ],
+    [
+      'icon'=> 'fas fa-shopping-cart',
+      'target'=> '/orders',
+      'label'=> 'Orders',
+      'key'=> 'orders',
+    ],
+    [
+      'icon'=> 'fab fa-product-hunt',
+      'target'=> '/products',
+      'label'=> 'Products',
+      'key'=> 'products',
+    ],
+    [
+      'icon'=> 'fab fa-stripe-s',
+      'target'=> '/suppliers',
+      'label'=> 'Suppliers',
+      'key'=> 'suppliers',
+    ],
+    [
+      'icon'=> 'fas fa-shopping-basket',
+      'target'=> '/purchases',
+      'label'=> 'Purchases',
+      'key'=> 'purchases',
+    ],
+    [
+      'icon'=> 'fas fa-shopping-bag',
+      'target'=> '/purchase_items',
+      'label'=> 'Purchase_items',
+      'key'=> 'purchase_items',
     ],
   ];
 @endphp

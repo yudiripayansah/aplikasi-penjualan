@@ -20,6 +20,7 @@ class CreateMenuTable extends Migration
             $table->text('link');
             $table->text('image');
             $table->softDeletes('delete_at');
+            $table->timestamps();
         });
     }
 
