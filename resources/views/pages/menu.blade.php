@@ -48,9 +48,6 @@
                 <thead>
                   <tr>
                     <th class="text-center" title="No" width="5%">No</th>
-                    <th class="text-center" title="Label">Label</th>
-                    <th class="text-center" title="Link">Link</th>
-                    <th class="text-center" title="Image">Image</th>
                     <th class="text-center" title="Name">Id Parent</th>
                     <th class="text-center" title="Username">Label</th>
                     <th class="text-center" title="Email">Link</th>
