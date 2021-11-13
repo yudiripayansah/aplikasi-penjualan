@@ -11,17 +11,20 @@ class Menu extends Model
     use HasFactory;
     protected $table = 'menu';
     protected $fillable = [
+        'id',
         'id_parent',
         'label',
         'link',
         'image',
     ];
-    
     public static function validate($validate)
     {
         $rule = [
+            'id' => 'required',
+            'id_parent' => 'required',
             'label' => 'required',
             'link' => 'required',
+            'image' => 'required',
         ];
         if ($validate['id']) {
             $rule['id_parent'] = 'required|unique:App\Models\Menu,id_parent,'.$validate['id'];

@@ -51,6 +51,9 @@
                     <th class="text-center" title="Label">Label</th>
                     <th class="text-center" title="Link">Link</th>
                     <th class="text-center" title="Image">Image</th>
+                    <th class="text-center" title="Name">Id Parent</th>
+                    <th class="text-center" title="Username">Label</th>
+                    <th class="text-center" title="Email">Link</th>
                     <th class="text-center" title="Action" width="15%">Action</th>
                   </tr>
                 </thead>
@@ -63,8 +66,7 @@
                     <td>{{$ld->image}}</td>
                     <td class="text-center">
                       <a href="/menu/form/update/{{$ld->id}}" class="btn btn-info btn-sm mx-1">Update</a>
-                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id={{$ld->id}}>delete</button>
-                    </td>  
+                      <button class="btn btn-danger btn-sm mx-1" id="btn-delete" data-id={{$ld->id}}>delete</button> 
                   </tr>
                   @endforeach
                 </tbody>
